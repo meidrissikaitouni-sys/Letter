@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Love ❤️</title>
+    <style>
+        /* ---- RESET & BODY ---- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at top, rgba(255, 255, 255, 0.55), transparent 35%),
+                linear-gradient(145deg, #fce4ec 0%, #f8bbd0 100%);
+            font-family: 'Segoe UI', 'Georgia', serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .site-shell {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ---- LOGIN CARD ---- */
+        .login-container {
+            background: rgba(255, 248, 250, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 42px 36px;
+            max-width: 520px;
+            width: 100%;
+            border-radius: 36px 14px 36px 14px;
+            box-shadow: 0 28px 60px -18px rgba(233, 30, 99, 0.38),
+                        0 0 0 2px rgba(255, 255, 255, 0.7) inset,
+                        0 0 0 1px rgba(248, 187, 208, 0.5);
+            position: relative;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border-radius: 28px 10px 28px 10px;
+            border: 1px solid rgba(233, 30, 99, 0.08);
+            pointer-events: none;
+        }
+
+        .panel-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .panel-title h1 {
+            font-size: 2rem;
+            color: #9c194f;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-title p {
+            color: #6b3049;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .login-form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field label {
+            font-weight: 600;
+            color: #a01c52;
+            letter-spacing: 0.3px;
+        }
+
+        .field input {
+            width: 100%;
+            border: 1px solid rgba(233, 30, 99, 0.15);
+            border-radius: 18px 7px 18px 7px;
+            padding: 15px 16px;
+            font-size: 1rem;
+            color: #4a1a2c;
+            background: rgba(255, 255, 255, 0.88);
+            outline: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .field input:focus {
+            border-color: rgba(233, 30, 99, 0.45);
+            box-shadow: 0 0 0 4px rgba(248, 187, 208, 0.38);
+            transform: translateY(-1px);
+        }
+
+        .login-button {
+            border: none;
+            border-radius: 18px 7px 18px 7px;
+            padding: 15px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            box-shadow: 0 16px 30px -16px rgba(173, 20, 87, 0.9);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px -16px rgba(173, 20, 87, 1);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-hint {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px dashed rgba(233, 30, 99, 0.22);
+            color: #6b3049;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .login-message {
+            min-height: 1.3em;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #c62828;
+            text-align: center;
+        }
+
+        .login-message.success {
+            color: #2e7d32;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ---- LETTER ENVELOPE / CARD ---- */
+        .letter-container {
+            background: #fff0f5;
+            padding: 40px 45px 45px 45px;
+            max-width: 780px;
+            width: 100%;
+            border-radius: 40px 12px 40px 12px;
+            box-shadow: 0 25px 50px -8px rgba(233, 30, 99, 0.3),
+                        0 0 0 2px #fce4ec inset,
+                        0 0 0 4px #ffffff inset;
+            position: relative;
+            transition: transform 0.3s ease;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* ---- HEARTS (decorative) ---- */
+        .hearts-deco {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2.4rem;
+            line-height: 1;
+            margin-bottom: 10px;
+            color: #e91e63;
+            text-shadow: 0 4px 12px rgba(233, 30, 99, 0.25);
+            animation: pulse-hearts 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-hearts {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        /* ---- MESSAGE BOX ---- */
+        .letter-box {
+            background: #ffffffcc;
+            backdrop-filter: blur(2px);
+            padding: 35px 30px;
+            border-radius: 28px 8px 28px 8px;
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.08),
+                        0 0 0 1px #f8bbd0 inset;
+            color: #4a1a2c;
+        }
+
+        /* ---- TYPOGRAPHY ---- */
+        .letter-box .greeting {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ad1457;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .letter-box .greeting span {
+            font-size: 1.8rem;
+        }
+
+        .letter-box p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 1.2rem;
+            color: #3e1a2a;
+        }
+
+        .letter-box p:last-of-type {
+            margin-bottom: 1.8rem;
+        }
+
+        .letter-box .closing {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ad1457;
+            text-align: right;
+            margin-top: 10px;
+            border-top: 2px dashed #f8bbd0;
+            padding-top: 20px;
+        }
+
+        .letter-box .closing .heart-sign {
+            color: #e91e63;
+            font-size: 1.6rem;
+            animation: pulse-hearts 1.8s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* ---- FLOATING HEARTS (background animation) ---- */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            font-size: 2rem;
+            color: #f06292;
+            opacity: 0.2;
+            animation: rise 12s linear infinite;
+            user-select: none;
+        }
+
+        .floating-hearts span:nth-child(1) { left: 5%;  font-size: 2.8rem; animation-duration: 14s; animation-delay: 0s; }
+        .floating-hearts span:nth-child(2) { left: 20%; font-size: 2rem; animation-duration: 16s; animation-delay: 2s; }
+        .floating-hearts span:nth-child(3) { left: 40%; font-size: 3.2rem; animation-duration: 12s; animation-delay: 4s; }
+        .floating-hearts span:nth-child(4) { left: 60%; font-size: 2.2rem; animation-duration: 18s; animation-delay: 1s; }
+        .floating-hearts span:nth-child(5) { left: 78%; font-size: 3rem; animation-duration: 15s; animation-delay: 3s; }
+        .floating-hearts span:nth-child(6) { left: 92%; font-size: 2.6rem; animation-duration: 13s; animation-delay: 5s; }
+        .floating-hearts span:nth-child(7) { left: 50%; font-size: 2rem; animation-duration: 17s; animation-delay: 6s; }
+
+        @keyframes rise {
+            0%   { bottom: -10%; opacity: 0.15; transform: scale(0.8) rotate(0deg); }
+            10%  { opacity: 0.3; }
+            90%  { opacity: 0.2; }
+            100% { bottom: 110%; opacity: 0; transform: scale(1.4) rotate(25deg); }
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 550px) {
+            .login-container {
+                padding: 26px 18px;
+            }
+            .panel-title h1 {
+                font-size: 1.6rem;
+            }
+            .letter-container {
+                padding: 20px 18px 25px 18px;
+            }
+            .letter-box {
+                padding: 22px 16px;
+            }
+            .letter-box p {
+                font-size: 0.98rem;
+                line-height: 1.65;
+            }
+            .letter-box .greeting {
+                font-size: 1.2rem;
+            }
+            .hearts-deco {
+                font-size: 1.8rem;
+                gap: 12px;
+            }
+            .floating-hearts span {
+                font-size: 1.6rem !important;
+            }
+        }
+
+        /* ---- SCROLLBAR (just for beauty) ---- */
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: #fce4ec;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f06292;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND FLOATING HEARTS -->
+    <div class="floating-hearts" aria-hidden="true">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+    </div>
+
+    <div class="site-shell">
+        <!-- LOGIN VIEW -->
+        <div class="login-container" id="loginView">
+            <div class="panel-title">
+                <h1>Private Letter Access</h1>
+                <p>Enter the correct username and password to unlock the letter.</p>
+            </div>
+
+            <form class="login-form" id="loginForm" autocomplete="off">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" type="text" placeholder="Enter username" />
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Enter password" />
+                </div>
+
+                <button class="login-button" type="submit">Unlock the letter</button>
+                <div class="login-message" id="loginMessage" aria-live="polite"></div>
+            </form>
+
+            <div class="login-hint">
+                This letter is protected. Use the exact username and password to continue.
+            </div>
+        </div>
+
+        <!-- MAIN LETTER -->
+        <div class="letter-container hidden" id="letterView">
+
+            <!-- Top decorative hearts -->
+            <div class="hearts-deco">
+                <span>♥</span>
+                <span>♥</span>
+                <span>♥</span>
+            </div>
+
+            <!-- Letter content -->
+            <div class="letter-box">
+
+                <div class="greeting">
+                    <span>🌸</span> My love, <span>🌸</span>
+                </div>
+
+                <p>
+                    Tomorrow is a big day, and I just wanted to send you this before everything else. I want you to know that, no matter what that piece of paper says, my pride in you is immeasurable and completely unconditional.
+                </p>
+
+                <p>
+                    When I think about this past year, I don't just see the study and the work. I see the strength, the resilience, and the sheer determination you showed every single day. I see you pushing through days when everything felt heavy, when the pain was almost too much, and when it would have been so easy to give up. But you didn't. You kept going. You got up, you fought, and you continued to work towards your goals, even on the bad days. That's not just something to be proud of; it's something that leaves me in awe of you.
+                </p>
+
+                <p>
+                    So, please, my love, don't let a number or a letter define your worth. Your value isn't measured by a grade; it's measured by the incredible strength of your spirit and the beautiful heart you carry. No matter the result, know that I am already incredibly, incredibly proud of the person you are.
+                </p>
+
+                <p>
+                    This moment is just a tiny step in a long, bright future. Use whatever happens as fuel, a lesson, or simply a checkpoint. Look forward to all the amazing things you are yet to achieve, because I know with your strength and hard work, you can do anything you set your mind to.
+                </p>
+
+                <p>
+                    And through it all, I want you to know that you are so deeply loved. I love you more than words can say. I love your strength, I love your heart, and I love the way you never give up. I am so lucky to be by your side.
+                </p>
+
+                <p>
+                    I'll be right here, no matter what. Let's look to the future together.
+                </p>
+
+                <div class="closing">
+                    Yours, always, <br />
+                    Mehdi <span class="heart-sign">♥</span>
+                </div>
+
+            </div>
+
+            <!-- Bottom decorative hearts -->
+            <div class="hearts-deco" style="margin-top: 14px; margin-bottom: 0;">
+                <span>♥</span>
+                <span>♥</span>
+                <span>♥</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const validUsername = 'Lfara';
+            const validPassword = 'saraxmehdi';
+            const loginForm = document.getElementById('loginForm');
+            const loginView = document.getElementById('loginView');
+            const letterView = document.getElementById('letterView');
+            const loginMessage = document.getElementById('loginMessage');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+
+            function showLetter() {
+                loginView.classList.add('hidden');
+                letterView.classList.remove('hidden');
+                sessionStorage.setItem('letterUnlocked', 'true');
+            }
+
+            if (sessionStorage.getItem('letterUnlocked') === 'true') {
+                showLetter();
+            }
+
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const enteredUsername = usernameInput.value.trim();
+                const enteredPassword = passwordInput.value;
+
+                if (enteredUsername === validUsername && enteredPassword === validPassword) {
+                    loginMessage.textContent = 'Access granted. Opening the letter...';
+                    loginMessage.classList.add('success');
+                    showLetter();
+                    return;
+                }
+
+                loginMessage.textContent = 'Wrong username or password. Try again.';
+                loginMessage.classList.remove('success');
+                passwordInput.value = '';
+                passwordInput.focus();
+            });
+        }());
+    </script>
+
+</body>
+</html>
